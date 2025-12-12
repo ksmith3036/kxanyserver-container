@@ -1,0 +1,32 @@
+Overfør filen kxany.docker, samt katalogene conf og webapps til docker-hvertsmaskin
+
+Utfør følgende kommando:
+	sudo docker load -i kxany.docker
+
+Start container:
+sudo docker run -d --name happy_knox -p 80:80 -p 443:443 -v ~/knox/conf:/usr/local/tomcat/conf -v ~/knox/webapps:/usr/local/tomcat/webapps tomcat:10.1.50-jre21-temurin-noble
+
+sudo docker container start happy_knox
+
+
+Se på logger
+-------------
+sudo docker exec -it happy_knox /bin/bash
+  cd /usr/local/tomcat/logs
+
+
+Bakgrunnsinformasjon
+--------------------
+Lage kxany.docker.
+
+På en maskin som har Docker tinstallert og har tilgang til Docker Hub på Internet:
+  docker pull tomcat:10.1.50-jre21-temurin-noble     
+  docker save -o kxany.docker tomcat:10.1.50-jre21-temurin-noble
+
+Foreløpig ikke testet: 
+  docker pull tomcat:10.1.50-jre25-temurin-noble
+  docker save -o kxany.docker tomcat:10.1.50-jre25-temurin-noble
+
+Tomcat versjon 10.1, som bør ha support fram til ca 2032. 
+JRE 21 Temurin har end-of-life 31. des. 2029.
+JRE 25 Temurin har end-of-life 30. sep. 2031.
