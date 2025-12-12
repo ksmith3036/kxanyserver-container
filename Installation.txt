@@ -3,6 +3,8 @@ Overfør filen kxany.docker, samt katalogene conf og webapps til docker-hvertsma
 Utfør følgende kommando:
 	sudo docker load -i kxany.docker
 
+Rediger ROOT\WEB-INF\classes\kx.properties. Erstatt knox.local med korrekt FQDN, eksempelvis knox.<the-subdomain-name>.mil.no.
+
 Start container:
 sudo docker run -d --name happy_knox -p 80:80 -p 443:443 -v ~/knox/conf:/usr/local/tomcat/conf -v ~/knox/webapps:/usr/local/tomcat/webapps tomcat:10.1.50-jre21-temurin-noble
 
