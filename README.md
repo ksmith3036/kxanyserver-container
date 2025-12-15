@@ -1,9 +1,25 @@
 # KxAnyServer Container
 
-Download Docker image from Docker Hub on a computer with Internet connection:
-  `docker pull tomcat:10.1.50-jre25-temurin-noble`
+Create the container based on the tomcat:10.1.50-jre25-temurin-noble docker image
 
-Save the Docker image to a file:
-  `docker save -o kxany.docker tomcat:10.1.50-jre25-temurin-noble`
+### Dependencies
+The procedure must be executed on a machine with Internet connection.
+
+The certificate must be placed in the conf folder, and the conf/server.xml file must
+be edited. 
+Set certificateKeystoreFile to the filename of the certificate-file.
+Set certificateKeystorePassword to the password.
+
+### Building
+In a command prompt, with the current directory in the KxAnyServer container source folder:
+```
+  docker build -t happy-knox:1.0 .
+```
+
+### Preparing for transfer
+Save the Docker image to a file
+```
+  docker save -o kxany.docker happy-knox:1.0
+```
 
 See Installation.txt  

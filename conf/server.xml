@@ -73,7 +73,7 @@
     	protocol="HTTP/1.1" scheme="https" secure="true" sslProtocol="TLS"
     	 defaultSSLHostConfigName="localhost">
 	    <SSLHostConfig hostName="localhost" protocols="TLSv1.2,TLSv1.3" >
-	    <Certificate certificateKeystoreFile="conf/KnoxServer.pfx" certificateKeystorePassword="" />
+	    <Certificate certificateKeystoreFile="conf/knox-watchtower.pfx" certificateKeystorePassword="Password99" />
 	    </SSLHostConfig>
 </Connector>
     <Connector connectionTimeout="20000" port="80" protocol="HTTP/1.1" hostName="localhost" />
@@ -87,7 +87,7 @@
     <Engine name="Catalina" defaultHost="localhost">
 
 <!--
-    <Connector SSLEnabled="true" clientAuth="false" keystoreFile="/usr/local/tomcat/conf/KnoxServer.pfx" keystorePass="" maxThreads="150" port="443" 
+    <Connector SSLEnabled="true" clientAuth="false" keystoreFile="/usr/local/tomcat/conf/knox-watchtower.pfx" keystorePass="Password99" maxThreads="150" port="443" 
     	protocol="HTTP/1.1" scheme="https" secure="true" sslProtocol="TLS"
     	hostName="localhost" />
     <Connector connectionTimeout="20000" port="80" protocol="HTTP/1.1" hostName="localhost" />
