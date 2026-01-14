@@ -13,13 +13,13 @@ Set certificateKeystorePassword to the password.
 ### Building
 In a command prompt, with the current directory in the KxAnyServer container source folder:
 ```
-  docker build -t happy-knox:1.0 .
+  docker build -t happy-knox:1.1 .
 ```
 
 ### Preparing for transfer
 Save the Docker image to a file
 ```
-  docker save -o kxany.docker happy-knox:1.0
+  docker save -o kxany-v1.1.docker happy-knox:1.1
 ```
 
 See Installation.txt  

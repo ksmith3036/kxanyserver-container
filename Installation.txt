@@ -2,14 +2,20 @@
 Transfer the file kxany.docker, as well as the conf directory to the docker host.
 
 Execute the following command
-    sudo docker load -i kxany.docker
+    sudo docker load -i kxany-v1.1.docker
 
 Start container:
-    docker run -d -p 443:443 --name happy_knox happy-knox:1.0
+    sudo docker run -d -p 443:443 --name happy_knox happy-knox:1.1
 
 Start / stop:
 sudo docker container stop happy_knox
 sudo docker container start happy_knox
+
+
+Verify installation:
+Use a web browser, and open the following URL: https://<ip-or-servername>/KnoxGSLB/policy
+This should result in text like this: 
+{"elm":{"validate":"off","apilog":"off","deniallog":"off","amslog":"off","timalog":"off"},"klm":{"validateTrackKey":"on","enrollDevice":"on","uninstallLicense":"on", "enrollContainer":"on","uninstallContainer":"on","notifyTrackKey":"on"},"spd":"off","kad":""}
 
 
 Check logs
@@ -20,17 +26,24 @@ sudo docker exec -it happy_knox /bin/bash
 
 Update certificate
 -------------------
-NB! This is just meant as an example, documenting one way to do it.
+NB! This is just meant as an example, documenting some ways to do it. 
+The samples assumes that the configuration folder is stored in the user home directory, as knox/conf.
 
-Update certificate in conf directory and edit server.xml to change filename and password.
+Update certificate in conf directory and edit server.xml to change filename and password, 
+and make sure FIPSMode is turned on in the Listener:
+  <Listener SSLEngine="on" FIPSMode="on" className="org.apache.catalina.core.AprLifecycleListener" />
+
 Build a new docker image:
-  sudo docker build -t happy-knox:1.1 -f Newcert.Dockerfile .
+  sudo docker build -t happy-knox:1.1.2 -f Newcert.Dockerfile .
   sudo docker container stop happy_knox
   sudo docker rm happy_knox
+  sudo docker run -d --name happy_knox -p 443:443 -v ~/knox/conf:/usr/local/tomcat/conf happy-knox:1.1.2
+
+Or as an alternative to updating the docker image, one might mount the files into the image:
+  if necessary, stop and delete the container first:
+      sudo docker stop happy_knox
+      sudo docker rm happy_knox
   sudo docker run -d --name happy_knox -p 443:443 -v ~/knox/conf:/usr/local/tomcat/conf happy-knox:1.1
-  
-As an alternative to updating the docker image, one might mount the files into the image:
-  sudo docker run -d --name happy_knox -p 443:443 -v ~/knox/conf:/usr/local/tomcat/conf happy-knox:1.0
 
 Background info
 --------------------

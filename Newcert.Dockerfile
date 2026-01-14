@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM happy-knox:1.0
+FROM happy-knox:1.1
 
 # Workdir er satt til /usr/local/tomcat i basis-image
 

@@ -6,6 +6,8 @@ FROM tomcat:10.1.50-jre25-temurin-noble
 
 COPY conf/* conf
 
+COPY openssl-3.0.18/. /
+
 COPY webapps/ROOT webapps/ROOT
 
 EXPOSE 443

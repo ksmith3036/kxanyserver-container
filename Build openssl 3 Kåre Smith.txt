@@ -1,0 +1,12 @@
+# Bygge OpnSSL for tomcat 10.1 docker image basert på Ubuntu noble
+
+# Last ned kildekode open OpenSSL 3.0.x (sjekk versjonen i docker-imaget, ta nyeste versjon av samme hoved-versjon) og pakk ut.
+Kildekode for 3.0.18 finnes på https://openssl-library.org/source
+
+
+  ./Configure fips enable-fips --openssldir=/usr/lib/ssl --prefix=/usr/lib --release --libdir=x86_64-linux-gnu
+  make build_sw
+  mkdir `pwd`/out
+  make DESTDIR=`pwd`/out install_sw install_ssldirs install_fips
+
+Kopier de nødvendige filer fra out-folder til openssl-folder i kilden til kxany/happy_knox container.
